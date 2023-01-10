@@ -18,6 +18,7 @@ connectDB();
 const Song = require("./models/song");
 const Album = require("./models/album");
 
+//gets all songs
 app.get("/", async (req, res) => {
 	try {
 		const songs = await Song.find();
@@ -28,6 +29,7 @@ app.get("/", async (req, res) => {
 	}
 });
 
+//testing enpoint to make sure it works
 app.get("/test", async (req, res) => {
 	res.json("Hello from test!");
 });
