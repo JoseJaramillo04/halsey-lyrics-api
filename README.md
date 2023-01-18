@@ -1,6 +1,6 @@
 
 # Halsey Lyric Snippets API
-[![Button Example](https://img.shields.io/badge/Live_Link_to_RapidAPI_[API_HOST]-37a779?style=for-the-badge)](Link)
+[![Button Example](https://img.shields.io/badge/Live_Link_to_RapidAPI_[API_HOST]-37a779?style=for-the-badge)](https://rapidapi.com/JoseJaramillo04/api/halsey-lyric-snippets)
 
 A Node.js API which serves lyrics snippets from Halsey's albums. The API allows users to request specific lyrics by album or by a specific song, and also includes the option to request a random song from Halsey's entire discography. The API can be accessed by specifying the artist name, which currently only supports "Halsey".
 
