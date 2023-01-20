@@ -4,7 +4,8 @@
 	"description": "desc",
 	"main": "index.js",
 	"scripts": {
-		"start": "nodemon handler.js"
+		"start offline": "sls offline start",
+		"deploy": "serverless deploy"
 	},
 	"keywords": [
 		"Halsey",

@@ -219,7 +219,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/halsey-lyrics-api/dev/1673168739721-2023-01-08T09:05:39.721Z/halsey-lyrics-api.zip"
+                "S3Key": "serverless/halsey-lyrics-api/dev/1674248242164-2023-01-20T20:57:22.164Z/halsey-lyrics-api.zip"
               },
               "Handler": "s_api.handler",
               "Runtime": "nodejs14.x",
@@ -237,14 +237,14 @@
               "ApiLogGroup"
             ]
           },
-          "ApiLambdaVersiond3xg9a1RkSgVhx52BqhhJt9L1fi0uydTpSvOhafuhg": {
+          "ApiLambdaVersionOQWmG1aH0i1eCWj2irepzE17AzIoy9AKtUVo4XIL50k": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ApiLambdaFunction"
               },
-              "CodeSha256": "vcyq5pkdXHx3L+VU5b75fSwI2rhsl2VmetKn7jzAf4k="
+              "CodeSha256": "7w9fX+K+gYoCjx0K1j/f8sfEvUFdZsb1rpV2TeTdQPQ="
             }
           },
           "HttpApi": {
@@ -399,7 +399,7 @@
           "ApiLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ApiLambdaVersiond3xg9a1RkSgVhx52BqhhJt9L1fi0uydTpSvOhafuhg"
+              "Ref": "ApiLambdaVersionOQWmG1aH0i1eCWj2irepzE17AzIoy9AKtUVo4XIL50k"
             },
             "Export": {
               "Name": "sls-halsey-lyrics-api-dev-ApiLambdaFunctionQualifiedArn"
@@ -530,6 +530,9 @@
       },
       "vpc": {}
     },
+    "plugins": [
+      "serverless-offline"
+    ],
     "pluginsData": {},
     "functions": {
       "api": {
@@ -546,7 +549,7 @@
         "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "ApiLambdaVersiond3xg9a1RkSgVhx52BqhhJt9L1fi0uydTpSvOhafuhg"
+        "versionLogicalId": "ApiLambdaVersionOQWmG1aH0i1eCWj2irepzE17AzIoy9AKtUVo4XIL50k"
       }
     },
     "configValidationMode": "warn",
@@ -561,6 +564,9 @@
       },
       "functions": {
         "$ref": "$[\"service\"][\"functions\"]"
+      },
+      "plugins": {
+        "$ref": "$[\"service\"][\"plugins\"]"
       }
     },
     "app": "halsey-lyrics-api",
@@ -573,7 +579,7 @@
     "artifact": "/Users/ferb7o2/personalCode/halsey-lyrics-api/.serverless/halsey-lyrics-api.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/halsey-lyrics-api/dev/1673168739721-2023-01-08T09:05:39.721Z",
+    "artifactDirectoryName": "serverless/halsey-lyrics-api/dev/1674248242164-2023-01-20T20:57:22.164Z",
     "artifact": "halsey-lyrics-api.zip"
   }
 }
