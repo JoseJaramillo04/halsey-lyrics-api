@@ -1,7 +1,7 @@
 org: ferb7o2
 app: halsey-lyrics-api
 service: halsey-lyrics-api
-frameworkVersion: '3'
+frameworkVersion: "3"
 
 provider:
   name: aws
@@ -11,4 +11,7 @@ functions:
   api:
     handler: handler.handler
     events:
-      - httpApi: '*'
+      - httpApi: "*"
+
+plugins:
+  - serverless-offline
