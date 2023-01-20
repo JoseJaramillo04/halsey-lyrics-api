@@ -46,7 +46,7 @@ app.get("/:artist/album", async (req, res) => {
 });
 
 //GET album by id
-app.get("/album/:id", async (req, res) => {
+app.get("/album/id/:id", async (req, res) => {
 	const { id } = req.params;
 	try {
 		const album = await Album.find({ _id: id });
