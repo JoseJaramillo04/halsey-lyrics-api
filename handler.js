@@ -8,7 +8,7 @@ const { default: mongoose } = require("mongoose");
 dotenv.config();
 const app = express();
 
-Array.prototype.randomSong = function () {
+Array.prototype.chooseRandom = function () {
 	return this[Math.floor(Math.random() * this.length)];
 };
 
@@ -22,10 +22,9 @@ const Album = require("./models/album");
 app.get("/", async (req, res) => {
 	try {
 		const songs = await Song.find();
-		console.log(songs);
 		res.json(songs);
 	} catch (error) {
-		console.log(error);
+		console.error(error);
 	}
 });
 
@@ -42,7 +41,19 @@ app.get("/:artist/album", async (req, res) => {
 
 		return res.json(albums);
 	} catch (error) {
-		console.log(error);
+		console.error(error);
+	}
+});
+
+//GET album by id
+app.get("/album/:id", async (req, res) => {
+	const { id } = req.params;
+	try {
+		const album = await Album.find({ _id: id });
+
+		return res.json(album[0]);
+	} catch (error) {
+		console.error(error);
 	}
 });
 
@@ -54,7 +65,7 @@ app.get("/:artist/album/:album", async (req, res) => {
 		const albums = await Album.find({ artist: artist, name: album });
 		return res.json(albums);
 	} catch (error) {
-		console.log(error);
+		console.error(error);
 	}
 });
 
@@ -69,7 +80,7 @@ app.get("/:artist/album/:album/song", async (req, res) => {
 		});
 		return res.json(songs);
 	} catch (error) {
-		console.log(error);
+		console.error(error);
 	}
 });
 
@@ -79,12 +90,14 @@ app.get("/:artist/album/:album/song/random", async (req, res) => {
 
 	try {
 		const songList = await Album.find({ artist: artist, name: album });
-		const songs = await Song.find({
-			_id: { $in: songList[0].songs },
+		const randomSongChosen = songList[0].songs.chooseRandom();
+
+		const songInfo = await Song.find({
+			_id: randomSongChosen,
 		});
-		return res.json(songs.randomSong());
+		return res.json(songInfo);
 	} catch (error) {
-		console.log(error);
+		console.error(error);
 	}
 });
 
@@ -104,7 +117,7 @@ app.get("/:artist/song", async (req, res) => {
 		});
 		return res.json(songs);
 	} catch (error) {
-		console.log(error);
+		console.error(error);
 	}
 });
 
@@ -118,34 +131,63 @@ app.get("/song/:song", async (req, res) => {
 		});
 		return res.json(songRes);
 	} catch (error) {
-		console.log(error);
+		console.error(error);
+	}
+});
+
+//Get song by $ID
+app.get("/song/id/:id", async (req, res) => {
+	const { id } = req.params;
+
+	try {
+		const songRes = await Song.find({
+			_id: id,
+		});
+		return res.json(songRes);
+	} catch (error) {
+		console.error(error);
 	}
 });
 
 //GET random out of all songs of $ARTIST
 app.get("/:artist/song/random", async (req, res) => {
 	const { artist } = req.params;
-	let songList = [];
 
 	try {
-		const albums = await Album.find({ artist: artist });
-		albums.forEach((thing) => {
-			songList = songList.concat(thing.songs);
-		});
+		const song = await Song.aggregate([{ $sample: { size: 1 } }]);
 
-		const songs = await Song.find({
-			_id: { $in: songList },
-		});
-		return res.json(songs.randomSong());
+		return res.json(song[0]);
 	} catch (error) {
-		console.log(error);
+		console.error(error);
 	}
 });
 
-// mongoose.connection.once("open", () => {
-// 	console.log("Connected to MongoDB");
-// 	app.listen(PORT, () => console.log(`server running on PORT ${PORT}`));
-// });
+//GET random out of all songs of $ARTIST with album info
+app.get("/:artist/song/random/info", async (req, res) => {
+	const { artist } = req.params;
+	let songList = [];
+
+	try {
+		const randomAlbumChosen = await Album.aggregate([{ $sample: { size: 1 } }]);
+
+		const randomSongChosen = randomAlbumChosen[0].songs.chooseRandom();
+
+		const songInfo = await Song.find({
+			_id: randomSongChosen,
+		});
+
+		const customJson = {
+			albumId: randomAlbumChosen[0]._id,
+			albumName: randomAlbumChosen[0].name,
+			releaseDate: randomAlbumChosen[0].releaseDate,
+			albumArtist: randomAlbumChosen[0].artist,
+			song: songInfo[0],
+		};
+		return res.json(customJson);
+	} catch (error) {
+		console.error(error);
+	}
+});
 
 module.exports.handler = serverless(app, {
 	callbackWaitsForEmptyEventLoop: false,
