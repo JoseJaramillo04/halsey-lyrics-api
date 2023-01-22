@@ -235,7 +235,6 @@ A Node.js API which serves lyrics snippets from Halsey's albums. The API allows 
 ```
 ##### sample JSON response
 ```json
-[
   {
     "_id": "63b7b10efac0fba0d5e1d187",
     "name": "Strange Love",
@@ -247,7 +246,6 @@ A Node.js API which serves lyrics snippets from Halsey's albums. The API allows 
      ...
     ]
   }
-]
 ```
 
 
