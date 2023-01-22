@@ -182,6 +182,73 @@ A Node.js API which serves lyrics snippets from Halsey's albums. The API allows 
 ]
 ```
 
+#### random song & song's album information out of ${artist}
+
+```http
+  GET /${artist}/song/random/info
+```
+##### sample JSON response
+```json
+{
+  "albumId": "63b9128cb13bd951c8a14c1f",
+  "albumName": "Manic",
+  "releaseDate": "2020-01-17T06:00:00.000Z",
+  "albumArtist": "Halsey",
+  "song": {
+    "_id": "63b9d7ddfe9002caf55acbe9",
+    "name": "I HATE EVERYBODY",
+    "lyrics": [
+      "I'm my own biggest enemy\nYeah, all my empathy's a disaster",
+      "Feelin' somethin' like a scaly thing\nWrapped too tightly 'round my own master",
+      ...
+    ]
+  }
+}
+```
+
+
+
+#### Get album by ${id}
+
+```http
+  GET /album/id/${id}
+```
+##### sample JSON response
+```json
+{
+  "_id": "63b88a2bc8450e8550fa6d5c",
+  "name": "Hopeless Fountain Kingdom (Deluxe)",
+  "releaseDate": "2017-06-02T05:00:00.000Z",
+  "songs": [
+    "63b88f02c8450e8550fa6d5d",
+    "63b8905fc8450e8550fa6d5e",
+    ...
+  ],
+  "artist": "Halsey"
+}
+```
+
+#### Get song by ${id}
+
+```http
+  GET /song/id/${id}
+```
+##### sample JSON response
+```json
+[
+  {
+    "_id": "63b7b10efac0fba0d5e1d187",
+    "name": "Strange Love",
+    "lyrics": [
+      "Everybody wants to know\nIf we fucked on the bathroom sink",
+      "How your hands felt in my hair\nIf we were high on amphetamines",
+      "And everybody wants to hear\nHow we chain-smoked until three",
+      "And how you laughed when you said my name\nAnd how you gripped my hips so mean",
+     ...
+    ]
+  }
+]
+```
 
 
 
