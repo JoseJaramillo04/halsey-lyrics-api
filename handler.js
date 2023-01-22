@@ -143,7 +143,7 @@ app.get("/song/id/:id", async (req, res) => {
 		const songRes = await Song.find({
 			_id: id,
 		});
-		return res.json(songRes);
+		return res.json(songRes[0]);
 	} catch (error) {
 		console.error(error);
 	}
