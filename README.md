@@ -254,5 +254,5 @@ A Node.js API which serves lyrics snippets from Halsey's albums. The API allows 
 
 ## Authors
 
-- [@JoseJaramillo04](https://www.github.com/JoseJaramillo04)
+- [@ferb7o2](https://www.github.com/ferb7o2)
 
